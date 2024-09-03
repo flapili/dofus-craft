@@ -28,6 +28,7 @@ jobs:
         uses: actions/upload-artifact@v4.4.0
         with:
           path: dist
+          name: frontend-dist
 
   deploy-to-github-page:
     needs: build-frontend
@@ -46,3 +47,5 @@ jobs:
       - name: Deploy to Github Pages
         id: deployment
         uses: actions/deploy-pages@v4.0.5
+        with:
+          artifact_name: frontend-dist
