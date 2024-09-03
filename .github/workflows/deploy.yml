@@ -1,4 +1,4 @@
-name: Deploy to Github Pages
+name: Deploy
 on:
   workflow_dispatch:
   push:
@@ -23,12 +23,6 @@ jobs:
 
       - name: Build
         run: corepack pnpm run generate
-
-      - name: Upload artifact for tauri
-        uses: actions/upload-artifact@v4.4.0
-        with:
-          path: dist
-          name: frontend-dist
 
       - name: Upload artifact for Github Pages
         uses: actions/upload-pages-artifact@v3.0.1
@@ -79,11 +73,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4.1.7
 
-      - name: Fetch frontend dist
-        uses: actions/download-artifact@v4.1.8
-        with:
-          name: frontend-dist
-
       - name: Setup Node.js
         uses: irby/setup-node-nvm@v1.0.0
 
@@ -109,3 +98,5 @@ jobs:
           releaseDraft: false
           prerelease: false
           args: ${{ matrix.args }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
