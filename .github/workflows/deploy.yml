@@ -25,7 +25,7 @@ jobs:
         run: corepack pnpm run generate
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.4.0
         with:
           path: dist
 
@@ -45,4 +45,4 @@ jobs:
     steps:
       - name: Deploy to Github Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v4.0.5
