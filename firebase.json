@@ -1,9 +1,0 @@
-{
-  "hosting": [
-    {
-      "site": "dofus-craft",
-      "public": "./dist",
-      "cleanUrls": true
-    }
-  ]
-}

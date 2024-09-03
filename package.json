@@ -12,29 +12,26 @@
     "deploy:web": "nuxt generate && firebase deploy --only hosting"
   },
   "dependencies": {
+    "@iconify-json/game-icons": "^1.2.0",
+    "@iconify-json/material-symbols": "^1.2.0",
     "@tauri-apps/api": "2.0.0-rc.4",
     "@tauri-apps/plugin-os": "2.0.0-rc.1",
     "@tauri-apps/plugin-process": "2.0.0-rc.1",
     "@unocss/eslint-plugin": "^0.62.3",
+    "@unocss/nuxt": "^0.62.3",
     "@unocss/reset": "^0.62.3",
     "@vueuse/core": "^11.0.3",
     "@vueuse/integrations": "^11.0.3",
     "@vueuse/nuxt": "^11.0.3",
     "fuse.js": "^7",
     "nuxt": "^3.13.0",
+    "unocss": "^0.62.3",
     "unocss-preset-scrollbar": "^0.3.1",
-    "vue": "latest"
+    "vue": "^3.5.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.0.0",
-    "@iconify-json/game-icons": "^1.1.10",
     "@tauri-apps/cli": "2.0.0-rc.8",
-    "@unocss/nuxt": "^0.62.3",
-    "eslint": "^9.9.1",
-    "firebase-admin": "^12.4.0",
-    "firebase-functions": "^5.1.1",
-    "firebase-functions-test": "^3.3.0",
-    "firebase-tools": "^13.16.0",
-    "unocss": "^0.62.3"
+    "eslint": "^9.9.1"
   }
 }

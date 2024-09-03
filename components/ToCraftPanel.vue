@@ -52,6 +52,18 @@ const actionPlan = computed(() => {
   return result
 })
 
+async function removeItem(itemId: ItemId) {
+  toCraft.value[itemId] = (toCraft.value[itemId] ?? 0) - 1
+  if (toCraft.value[itemId] <= 0) {
+    delete toCraft.value[itemId]
+  }
+
+  if (supportMultiWindows()) {
+    const windowMain = await WebviewWindow.getByLabel('main')
+    windowMain?.emit('toCraft', toCraft.value)
+  }
+}
+
 async function decomposeRecipe(itemId: ItemId, quantity: number) {
   toCraft.value[itemId] = (toCraft.value[itemId] ?? 0) + quantity
 
@@ -60,6 +72,16 @@ async function decomposeRecipe(itemId: ItemId, quantity: number) {
     windowMain?.emit('toCraft', toCraft.value)
   }
 }
+
+onKeyStroke(['ArrowLeft', 'ArrowRight'], (e) => {
+  e.preventDefault()
+  if (e.key === 'ArrowLeft') {
+    activeTab.value = 'components'
+  }
+  else if (e.key === 'ArrowRight') {
+    activeTab.value = 'actionPlan'
+  }
+})
 </script>
 
 <template>
@@ -95,10 +117,10 @@ async function decomposeRecipe(itemId: ItemId, quantity: number) {
       <ul v-if="activeTab === 'components'" class="flex flex-col flex-gap-1">
         <template v-for="[componentId, quantity] in Object.entries(components)" :key="componentId">
           <li v-if="quantity - (toCraft[componentId as ItemId] ?? 0) > 0" data-tauri-drag-region>
+            {{ recipes[componentId as ItemId].name }} x {{ quantity - (toCraft[componentId as ItemId] ?? 0) }}
             <button v-if="recipes[componentId as ItemId].recipe" @click="decomposeRecipe(componentId as ItemId, quantity)">
               <i class="i-game-icons:stone-crafting block" />
             </button>
-            {{ recipes[componentId as ItemId].name }} x {{ quantity - (toCraft[componentId as ItemId] ?? 0) }}
           </li>
         </template>
       </ul>
@@ -109,6 +131,9 @@ async function decomposeRecipe(itemId: ItemId, quantity: number) {
           <ul class="ml-2">
             <li v-for="[itemId, quantity] in Object.entries(items)" :key="itemId" data-tauri-drag-region>
               {{ recipes[itemId as ItemId].name }} x {{ quantity }}
+              <button @click="removeItem(itemId as ItemId)">
+                <i class="i-material-symbols:delete-forever block" />
+              </button>
             </li>
           </ul>
         </li>

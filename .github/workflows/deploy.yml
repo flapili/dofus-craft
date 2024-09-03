@@ -1,0 +1,48 @@
+name: Deploy to Github Pages
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: irby/setup-node-nvm@v1.0.0
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install Dependencies
+        run: corepack pnpm install
+
+      - name: Build
+        run: corepack pnpm run generate
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          path: dist
+
+  deploy-to-github-page:
+    needs: build-frontend
+    
+    permissions:
+      pages: write
+      id-token: write
+      
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+      
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Github Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
