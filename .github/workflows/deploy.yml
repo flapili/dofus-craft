@@ -25,9 +25,9 @@ jobs:
         run: corepack pnpm run generate
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4.4.0
+        uses: actions/upload-pages-artifact@v3.0.1
         with:
-          path: .output/public
+          path: dist
           name: frontend-dist
 
   deploy-to-github-page:
