@@ -60,6 +60,8 @@ jobs:
     permissions:
       contents: write
     
+    needs: build-frontend
+
     strategy:
       fail-fast: false
       matrix:
