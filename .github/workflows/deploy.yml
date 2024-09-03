@@ -24,17 +24,17 @@ jobs:
       - name: Build
         run: corepack pnpm run generate
 
-      - name: Upload artifact
+      - name: Upload artifact for tauri
         uses: actions/upload-artifact@v4.4.0
         with:
           path: dist
           name: frontend-dist
 
-      - name: Upload artifact
+      - name: Upload artifact for Github Pages
         uses: actions/upload-pages-artifact@v3.0.1
         with:
           path: dist
-          name: gthub-page
+          name: github-page
 
   deploy-to-github-page:
     needs: build-frontend
@@ -102,7 +102,7 @@ jobs:
       - name: build app
         uses: tauri-apps/tauri-action@v0.5.13
         with:
-          tauriScript: pnpm dlx tauri-apps/cli@$(node -p "require('./package.json').devDependencies['@tauri-apps/cli']") tauri
+          tauriScript: pnpm tauri
           tagName: app-v__VERSION__
           releaseName: 'App v__VERSION__'
           releaseBody: 'See the assets to download this version and install.'
