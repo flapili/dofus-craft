@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { WebviewWindow } from '@tauri-apps/api/webviewWindow'
-
 import recipes from '@/assets/recipes.json'
 
-const activeTab = ref<'components' | 'actionPlan'>('components')
+import { WebviewWindow } from '@tauri-apps/api/webviewWindow'
 
+const activeTab = ref<'components' | 'actionPlan'>('components')
 const toCraft = useToCraft()
 
 const components = computed(() => {

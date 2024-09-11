@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useFuse } from '@vueuse/integrations/useFuse'
-import { WebviewWindow, getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow'
+import recipes from '@/assets/recipes.json'
+import { getCurrentWebviewWindow, WebviewWindow } from '@tauri-apps/api/webviewWindow'
 import { exit } from '@tauri-apps/plugin-process'
 
-import recipes from '@/assets/recipes.json'
+import { useFuse } from '@vueuse/integrations/useFuse'
 
 const toCraft = useToCraft()
 

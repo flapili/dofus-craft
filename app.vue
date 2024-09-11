@@ -1,13 +1,18 @@
 <script setup lang="ts">
-import type { WebviewWindow } from '@tauri-apps/api/webviewWindow'
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow'
+import type { WebviewWindow } from '@tauri-apps/api/webviewWindow'
 
 useHead({
   title: 'Dofus Craft',
-  // favicon: '/favicon.ico',
   link: [
     { rel: 'icon', type: 'image/png', href: '/icon.png' },
   ],
+})
+
+useSeoMeta({
+  title: 'Dofus Craft',
+  description: 'Dofus-Craft vous aide à gérer vos craft sur Dofus.',
+  ogImage: '/icon.png',
 })
 
 const toCraft = useToCraft()
